@@ -1,11 +1,14 @@
 // query selector variables go here 👇
-
 var targetImage = document.querySelector('.poster-img');
-
 var targetTitle = document.querySelector('.poster-title');
-
 var targetQuote = document.querySelector('.poster-quote');
-
+var formButton = document.querySelector('.show-form');
+var mainPoster = document.querySelector('.main-poster');
+var mainForm = document.querySelector('.poster-form');
+var savedPostersButton = document.querySelector('.show-saved');
+var savedPostersPage = document.querySelector('.saved-posters');
+var targetMainFromForm = document.querySelector('.show-main');
+var targetMainFromSaved = document.querySelector('.back-to-main');
 
 // we've provided you with some data to work with 👇
 
@@ -109,10 +112,17 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 
-
-
+var savedPosters = [
+  
+];
 // event listeners go here 👇
+formButton.addEventListener('click', switchToFormPage);
 
+savedPostersButton.addEventListener('click', switchToSavedPosters);
+
+targetMainFromForm.addEventListener('click', switchBackFromForm);
+
+targetMainFromSaved.addEventListener('click', switchBackFromSaved);
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 
@@ -125,3 +135,24 @@ targetImage.src = images[getRandomIndex(images)];
 targetTitle.innerText = titles[getRandomIndex(titles)];
 
 targetQuote.innerText = quotes[getRandomIndex(quotes)];
+
+
+function switchToFormPage() {
+  mainPoster.classList.add('hidden');
+  mainForm.classList.remove('hidden');
+}
+
+function switchToSavedPosters() {
+  mainPoster.classList.add('hidden');
+  savedPostersPage.classList.remove('hidden')
+}
+
+function switchBackFromForm() {
+  mainForm.classList.add('hidden');
+  mainPoster.classList.remove('hidden');
+}
+
+function switchBackFromSaved() {
+  mainPoster.classList.remove('hidden');
+  savedPostersPage.classList.add('hidden');
+}
