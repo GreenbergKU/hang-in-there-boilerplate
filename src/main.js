@@ -13,6 +13,9 @@ var createPosterButton = document.querySelector('.make-poster');
 var imageInput = document.querySelector('#poster-image-url');
 var titleInput = document.querySelector('#poster-title');
 var quoteInput = document.querySelector('#poster-quote');
+var randomButton = document.querySelector('.show-random')
+
+var showSavedButton = document.querySelector('.show-saved')
 
 // we've provided you with some data to work with 👇
 
@@ -129,17 +132,51 @@ targetMainFromForm.addEventListener('click', switchBackFromForm);
 targetMainFromSaved.addEventListener('click', switchBackFromSaved);
 
 createPosterButton.addEventListener('click', saveInput);
+randomButton.addEventListener('click', goRandom);
+
+
+var showSavedButton = document.querySelector('.show-saved')
+savedPostersButton.addEventListener('click', goSavePoster);
+
+// showSavedListen.addEventListener('click', showSaved);
 
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
+function showSaved () {
+  var image = imageInput.value;
+  var title = titleInput.value;
+  var quote = quoteInput.value;
+  currentPoster = [(image, title, quote)];
+
+savedPosters[array] = [images, titles, quotes];
+// image[array] = [images]; 
+// title[array] = [titles]; 
+// quote[array] = [quotes]; 
+}
+
+function goRandom() {
+  targetImage.src = images[getRandomIndex(images)];
+  targetTitle.innerText = titles[getRandomIndex(titles)];
+  targetQuote.innerText = quotes[getRandomIndex(quotes)];
+}
+
+function goSavePoster() {
+  currentPoster.push(image);
+  currentPoster.push(tite);
+  currentPoster.push(quote);
+  savedPosters.push(currentPoster);
+}
+
+
+
+
 
 var myPoster;
-
 function saveInput(event) {
   images.push(imageInput.value);
   titles.push(titleInput.value);
   quotes.push(quoteInput.value);
-  myPoster = new Poster(imageInput.value, titleInput.value, quoteInput.value);
+  myPoster = new Poster(imageInput.value, titleInput.value, quoteInput.value)
   targetImage.src = myPoster.imageURL;
   targetTitle.innerText = myPoster.title;
   targetQuote.innerText = myPoster.quote;
