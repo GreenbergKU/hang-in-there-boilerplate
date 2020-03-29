@@ -8,17 +8,14 @@ var nevermindBtn = document.querySelector('.show-main'); //this is the 'nevermin
 var quoteInput = document.querySelector('#poster-quote'); //this is the quote input section for make you own poster
 var randomButton = document.querySelector('.show-random') //this is the show random poster button
 var savedPostersBtn = document.querySelector('.show-saved'); //this is the show saved button
+var savedPostersGrid = document.querySelector('.saved-posters-grid'); //this is the are where the saved posters go
 var savedPostersSec = document.querySelector('.saved-posters'); //this is the saved posters page
+var saveMyPosterBtn = document.querySelector('.save-poster'); // this button saves the poster made
 var showPosterBtn = document.querySelector('.make-poster'); //This is the show my poster button
 var targetImage = document.querySelector('.poster-img'); //This is the main poster image
 var targetQuote = document.querySelector('.poster-quote'); //this is the main poster quote
 var targetTitle = document.querySelector('.poster-title'); //this is the main poster title
 var titleInput = document.querySelector('#poster-title'); //this is the input title section for the make you poster page
-
-// var showSavedButton = document.querySelector('.show-saved')
-
-// we've provided you with some data to work with 👇
-
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -39,7 +36,6 @@ var images = [
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
 ];
-
 var titles = [
   "determination",
   "success",
@@ -77,7 +73,6 @@ var titles = [
   "understanding",
   "wisdom"
 ];
-
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
@@ -118,24 +113,22 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-
 var savedPosters = [
-
+  makePoster(
+     "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
+     "Optimism",
+     "Keep a joyful heart!"
+   )
 ];
-// event listeners go here 👇
+var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
+
 makePosterBtn.addEventListener('click', switchToFormPage);
-
 savedPostersBtn.addEventListener('click', switchToSavedPosters);
-
 nevermindBtn.addEventListener('click', switchBackFromForm);
-
 backToMainBtn.addEventListener('click', switchBackFromSaved);
-
 showPosterBtn.addEventListener('click', saveInput);
-
 randomButton.addEventListener('click', goRandom);
-//
-// savedPostersButton.addEventListener('click', goSavePoster);
+saveMyPosterBtn.addEventListener('click', goSavePoster);
 
 // showSavedListen.addEventListener('click', showSaved);
 
@@ -149,13 +142,14 @@ randomButton.addEventListener('click', goRandom);
 //   var quote = quoteInput.value;
 //   currentPoster = [(image, title, quote)];
 //
-// savedPosters[array] = [images, titles, quotes];
-// // image[array] = [images];
-// // title[array] = [titles];
-// // quote[array] = [quotes];
-// }
-//
 
+// function goSavePoster() {
+//   savedPostersGrid.push(cusPoster);
+//   // currentPoster.push(image);
+//   // currentPoster.push(tite);
+//   // currentPoster.push(quote);
+//   // savedPosters.push(currentPoster);
+// }
 //
 // function goSavePoster() {
 //   currentPoster.push(image);
@@ -164,13 +158,14 @@ randomButton.addEventListener('click', goRandom);
 //   savedPosters.push(currentPoster);
 // }
 
-
-
-
 function goRandom() {
   targetImage.src = images[getRandomIndex(images)];
   targetTitle.innerText = titles[getRandomIndex(titles)];
   targetQuote.innerText = quotes[getRandomIndex(quotes)];
+}
+
+function makePoster(imageURL, title, quote) {
+  return new Poster(imageURL, title, quote);
 }
 
 function saveInput(event) {
@@ -184,7 +179,7 @@ function saveInput(event) {
   titles.push(cusTitle);
   quotes.push(cusQuote);
 
-  cusPoster = new Poster(cusImage, cusTitle, cusQuote);
+  cusPoster = makePoster(cusImage, cusTitle, cusQuote);
 
   targetImage.src = cusPoster.imageURL;
   targetTitle.innerText = cusPoster.title;
@@ -194,16 +189,28 @@ function saveInput(event) {
   mainPosterSec.classList.remove('hidden');
 }
 
+function onlyOnce() {
+  for (var i = 0; i < savedPosters.length; i ++) {
+    if (savedPosters[i].id === cusPoster.id) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function goSavePoster() {
+  if (onlyOnce()) {
+    savedPosters.push(cusPoster);
+  }
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
 targetImage.src = images[getRandomIndex(images)];
-
 targetTitle.innerText = titles[getRandomIndex(titles)];
-
 targetQuote.innerText = quotes[getRandomIndex(quotes)];
-
 
 function switchToFormPage() {
   mainPosterSec.classList.add('hidden');
