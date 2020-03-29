@@ -1,19 +1,19 @@
 // query selector variables go here 👇
-var backToMainBtn = document.querySelector('.back-to-main');
-var imageInput = document.querySelector('#poster-image-url');
-var mainPosterSec = document.querySelector('.main-poster');
-var makePosterBtn = document.querySelector('.show-form');
-var makePosterSec = document.querySelector('.poster-form');
-var nevermindBtn = document.querySelector('.show-main');
-var quoteInput = document.querySelector('#poster-quote');
-var randomButton = document.querySelector('.show-random')
-var savedPostersBtn = document.querySelector('.show-saved');
-var savedPostersSec = document.querySelector('.saved-posters');
-var showPosterBtn = document.querySelector('.make-poster');
-var targetImage = document.querySelector('.poster-img');
-var targetQuote = document.querySelector('.poster-quote');
-var targetTitle = document.querySelector('.poster-title');
-var titleInput = document.querySelector('#poster-title');
+var backToMainBtn = document.querySelector('.back-to-main'); //this button take you back to main page from saved poster page
+var imageInput = document.querySelector('#poster-image-url'); //this is the image input section for make your our poster
+var mainPosterSec = document.querySelector('.main-poster'); //this is the main poster page
+var makePosterBtn = document.querySelector('.show-form'); //this is the button for 'make your our poster'
+var makePosterSec = document.querySelector('.poster-form'); //this is the 'make your poster' form page
+var nevermindBtn = document.querySelector('.show-main'); //this is the 'nevermind,take me back' button
+var quoteInput = document.querySelector('#poster-quote'); //this is the quote input section for make you own poster
+var randomButton = document.querySelector('.show-random') //this is the show random poster button
+var savedPostersBtn = document.querySelector('.show-saved'); //this is the show saved button
+var savedPostersSec = document.querySelector('.saved-posters'); //this is the saved posters page
+var showPosterBtn = document.querySelector('.make-poster'); //This is the show my poster button
+var targetImage = document.querySelector('.poster-img'); //This is the main poster image
+var targetQuote = document.querySelector('.poster-quote'); //this is the main poster quote
+var targetTitle = document.querySelector('.poster-title'); //this is the main poster title
+var titleInput = document.querySelector('#poster-title'); //this is the input title section for the make you poster page
 
 // var showSavedButton = document.querySelector('.show-saved')
 
