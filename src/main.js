@@ -130,34 +130,6 @@ showPosterBtn.addEventListener('click', saveInput);
 randomButton.addEventListener('click', goRandom);
 saveMyPosterBtn.addEventListener('click', goSavePoster);
 
-// showSavedListen.addEventListener('click', showSaved);
-
-// functions and event handlers go here 👇
-// (we've provided one for you to get you started)!
-
-
-// function showSaved () {
-//   var image = imageInput.value;
-//   var title = titleInput.value;
-//   var quote = quoteInput.value;
-//   currentPoster = [(image, title, quote)];
-//
-
-// function goSavePoster() {
-//   savedPostersGrid.push(cusPoster);
-//   // currentPoster.push(image);
-//   // currentPoster.push(tite);
-//   // currentPoster.push(quote);
-//   // savedPosters.push(currentPoster);
-// }
-//
-// function goSavePoster() {
-//   currentPoster.push(image);
-//   currentPoster.push(tite);
-//   currentPoster.push(quote);
-//   savedPosters.push(currentPoster);
-// }
-
 function goRandom() {
   targetImage.src = images[getRandomIndex(images)];
   targetTitle.innerText = titles[getRandomIndex(titles)];
@@ -199,8 +171,9 @@ function onlyOnce() {
 }
 
 function goSavePoster() {
+
   if (onlyOnce()) {
-    savedPosters.push(cusPoster);
+    savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
   }
 }
 
@@ -218,8 +191,22 @@ function switchToFormPage() {
 }
 
 function switchToSavedPosters() {
+  savedPostersGrid.innerHTML = "";
+
+  for (var i = 0; i < savedPosters.length; i++){
+    savedPostersGrid.innerHTML += `
+          <article>
+            <img src=${savedPosters[i].imageURL}>
+            <h2>${savedPosters[i].title}</h2>
+            <h4>${savedPosters[i].quote}</h4>
+          </article>`;
+  }
   mainPosterSec.classList.add('hidden');
   savedPostersSec.classList.remove('hidden')
+}
+
+function deletePoster() {
+
 }
 
 function switchBackFromForm() {
