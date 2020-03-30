@@ -165,8 +165,8 @@ function goRandom() {
 }
 
 function makePoster(imageURL, title, quote) {
-  return new Poster(imageURL, title, quote);
-}
+   return new Poster(imageURL, title, quote);
+ }
 
 function saveInput(event) {
   event.preventDefault();
@@ -199,8 +199,9 @@ function onlyOnce() {
 }
 
 function goSavePoster() {
+
   if (onlyOnce()) {
-    savedPosters.push(cusPoster);
+    savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
   }
 }
 
@@ -213,13 +214,24 @@ targetTitle.innerText = titles[getRandomIndex(titles)];
 targetQuote.innerText = quotes[getRandomIndex(quotes)];
 
 function switchToFormPage() {
-  mainPosterSec.classList.add('hidden');
-  makePosterSec.classList.remove('hidden');
-}
+   mainPosterSec.classList.add('hidden');
+   makePosterSec.classList.remove('hidden');
+ }
 
+//
 function switchToSavedPosters() {
+  savedPostersGrid.innerHTML = "";
+  for (var i = 0; i < savedPosters.length; i++){
+    savedPostersGrid.innerHTML += `
+          <article>
+            <img src=${savedPosters[i].imageURL}>
+            <h2>${savedPosters[i].title}</h2>
+            <h4>${savedPosters[i].quote}</h4>
+          </article>`;
+  }
   mainPosterSec.classList.add('hidden');
   savedPostersSec.classList.remove('hidden')
+
 }
 
 function switchBackFromForm() {
