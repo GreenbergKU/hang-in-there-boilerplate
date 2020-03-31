@@ -113,6 +113,7 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
+
 var savedPosters = [
   makePoster(
      "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
@@ -120,6 +121,7 @@ var savedPosters = [
      "Keep a joyful heart!"
    )
 ];
+
 var onscreenPoster;
 // var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
 
@@ -187,14 +189,16 @@ function onlyOnce() {
 function goSavePoster() {
   if (onlyOnce()) {
     savedPosters.push(onscreenPoster);
-    // savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
+    images.push(cusImage.value);
+    titles.push(cusTitle.value);
+    quotes.push(cusQuote.value);    
   }
 }
+    // savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
 // targetImage.src = images[getRandomIndex(images)];
 // targetTitle.innerText = titles[getRandomIndex(titles)];
 // targetQuote.innerText = quotes[getRandomIndex(quotes)];
@@ -203,24 +207,30 @@ function switchToFormPage() {
    mainPosterSec.classList.add('hidden');
    makePosterSec.classList.remove('hidden');
    savedPostersSec.classList.add('hidden');
- }
-
+}
 
 function switchToSavedPosters() {
-  savedPostersGrid.innerHTML = "";
-  
-  for (var i = 0; i < savedPosters.length; i++){
-    savedPostersGrid.innerHTML += `
-          <article>
-            <img src=${savedPosters[i].imageURL}>
-            <h2>${savedPosters[i].title}</h2>
-            <h4>${savedPosters[i].quote}</h4>
-          </article>`;
-  }
-  mainPosterSec.classList.add('hidden');
-  savedPostersSec.classList.remove('hidden')
+    mainPosterSec.classList.add('hidden');
+    savedPostersSec.classList.remove('hidden');
+    savedPostersGrid.innerHTML = "";
+    for (var i = 0; i < savedPosters.length; i++) {
+        savedPostersGrid.insertAdjacentHTML("afterbegin", `
+            <div class="mini-poster" data-id=${savedPosters[i].id}>
+              <img src=${savedPosters[i].imageURL}>
+              <h2>${savedPosters[i].title}</h2>
+              <h4>${savedPosters[i].quote}</h4>
+            </div>`)
+    } 
+   
 }
+        //   <article>
+        //     <img src=${savedPosters[i].imageURL}>
+        //     <h2>${savedPosters[i].title}</h2>
+        //     <h4>${savedPosters[i].quote}</h4>
+        //   </article>`;
+
 //makePoster(targetImage.src, targetTitle.innerText, targetQuote.innerText)
+
 function deletePoster() {
 
 }
