@@ -120,7 +120,8 @@ var savedPosters = [
      "Keep a joyful heart!"
    )
 ];
-var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
+var onscreenPoster;
+// var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
 
 makePosterBtn.addEventListener('click', switchToFormPage);
 savedPostersBtn.addEventListener('click', switchToSavedPosters);
@@ -131,14 +132,18 @@ randomButton.addEventListener('click', goRandom);
 saveMyPosterBtn.addEventListener('click', goSavePoster);
 
 function goRandom() {
-  targetImage.src = images[getRandomIndex(images)];
-  targetTitle.innerText = titles[getRandomIndex(titles)];
-  targetQuote.innerText = quotes[getRandomIndex(quotes)];
+  var randomImage = images[getRandomIndex(images)];
+  var randomTitle = titles[getRandomIndex(titles)];
+  var randomQuote = quotes[getRandomIndex(quotes)];
+  targetImage.src = randomImage;
+  targetTitle.innerText = randomTitle;
+  targetQuote.innerText = randomQuote;
+  onscreenPoster = new Poster(randomImage, randomTitle, randomQuote);
 }
 
 function makePoster(imageURL, title, quote) {
-   return new Poster(imageURL, title, quote);
- }
+    return new Poster(imageURL, title, quote);
+}
 
 function saveInput(event) {
   event.preventDefault();
@@ -147,15 +152,24 @@ function saveInput(event) {
   var cusTitle = titleInput.value;
   var cusQuote = quoteInput.value;
 
-  images.push(cusImage);
-  titles.push(cusTitle);
-  quotes.push(cusQuote);
+  // images.push(cusImage);
+  // titles.push(cusTitle);
+  // quotes.push(cusQuote);
 
   cusPoster = makePoster(cusImage, cusTitle, cusQuote);
 
   targetImage.src = cusPoster.imageURL;
   targetTitle.innerText = cusPoster.title;
   targetQuote.innerText = cusPoster.quote;
+  
+  //added code below
+  onscreenPoster = new Poster (cusImage, cusTitle, cusQuote);
+  
+  if (cusPoster.imageURL === "") {
+    switchBackFromSaved();
+    goRandom();  
+  }
+  // added code above
 
   makePosterSec.classList.add('hidden');
   mainPosterSec.classList.remove('hidden');
@@ -163,7 +177,7 @@ function saveInput(event) {
 
 function onlyOnce() {
   for (var i = 0; i < savedPosters.length; i ++) {
-    if (savedPosters[i].id === cusPoster.id) {
+    if (savedPosters[i].id === onscreenPoster.id) {
       return false;
     }
   }
@@ -171,9 +185,9 @@ function onlyOnce() {
 }
 
 function goSavePoster() {
-
   if (onlyOnce()) {
-    savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
+    savedPosters.push(onscreenPoster);
+    // savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
   }
 }
 
@@ -181,16 +195,17 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-targetImage.src = images[getRandomIndex(images)];
-targetTitle.innerText = titles[getRandomIndex(titles)];
-targetQuote.innerText = quotes[getRandomIndex(quotes)];
+// targetImage.src = images[getRandomIndex(images)];
+// targetTitle.innerText = titles[getRandomIndex(titles)];
+// targetQuote.innerText = quotes[getRandomIndex(quotes)];
 
 function switchToFormPage() {
    mainPosterSec.classList.add('hidden');
    makePosterSec.classList.remove('hidden');
+   savedPostersSec.classList.add('hidden');
  }
 
-//
+
 function switchToSavedPosters() {
   savedPostersGrid.innerHTML = "";
   
@@ -205,7 +220,7 @@ function switchToSavedPosters() {
   mainPosterSec.classList.add('hidden');
   savedPostersSec.classList.remove('hidden')
 }
-
+//makePoster(targetImage.src, targetTitle.innerText, targetQuote.innerText)
 function deletePoster() {
 
 }
@@ -219,3 +234,5 @@ function switchBackFromSaved() {
   mainPosterSec.classList.remove('hidden');
   savedPostersSec.classList.add('hidden');
 }
+
+goRandom();
