@@ -1,25 +1,22 @@
-//<script src="../hang_src_try/try.js"></script>
-// query selector variables go here 👇
-var backToMainBtn = document.querySelector('.back-to-main'); //this button take you back to main page from saved poster page
-var imageInput = document.querySelector('#poster-image-url'); //this is the image input section for make your our poster
-var mainPosterSec = document.querySelector('.main-poster'); //this is the main poster page
-var makePosterBtn = document.querySelector('.show-form'); //this is the button for 'make your our poster'
-var makePosterSec = document.querySelector('.poster-form'); //this is the 'make your poster' form page
-var nevermindBtn = document.querySelector('.show-main'); //this is the 'nevermind,take me back' button
-var quoteInput = document.querySelector('#poster-quote'); //this is the quote input section for make you own poster
-var randomButton = document.querySelector('.show-random') //this is the show random poster button
-var savedPostersBtn = document.querySelector('.show-saved'); //this is the show saved button
-var savedPostersGrid = document.querySelector('.saved-posters-grid'); //this is the are where the saved posters go
-var savedPostersSec = document.querySelector('.saved-posters'); //this is the saved posters page
-var saveMyPosterBtn = document.querySelector('.save-poster'); // this button saves the poster made
-var showPosterBtn = document.querySelector('.make-poster'); //This is the show my poster button
-var targetImage = document.querySelector('.poster-img'); //This is the main poster image
-var targetQuote = document.querySelector('.poster-quote'); //this is the main poster quote
-var targetTitle = document.querySelector('.poster-title'); //this is the main poster title
-var titleInput = document.querySelector('#poster-title'); //this is the input title section for the make you poster page
-var tossOutDiv = document.querySelector('.mini-poster'); //this is the grid page, all 9 mini-posters areas, purpose: doubleclick delete
-var tossOutMini = document.querySelector('.div.mini-poster'); //this is the grid page, all 9 mini-posters areas, purpose: doubleclick delete
-
+var backToMainBtn = document.querySelector('.back-to-main');
+var imageInput = document.querySelector('#poster-image-url');
+var mainPosterSec = document.querySelector('.main-poster');
+var makePosterBtn = document.querySelector('.show-form');
+var makePosterSec = document.querySelector('.poster-form');
+var nevermindBtn = document.querySelector('.show-main');
+var quoteInput = document.querySelector('#poster-quote');
+var randomButton = document.querySelector('.show-random')
+var savedPostersBtn = document.querySelector('.show-saved');
+var savedPostersGrid = document.querySelector('.saved-posters-grid');
+var savedPostersSec = document.querySelector('.saved-posters');
+var saveMyPosterBtn = document.querySelector('.save-poster');
+var showPosterBtn = document.querySelector('.make-poster');
+var targetImage = document.querySelector('.poster-img');
+var targetQuote = document.querySelector('.poster-quote');
+var targetTitle = document.querySelector('.poster-title');
+var titleInput = document.querySelector('#poster-title');
+var tossOutDiv = document.querySelector('.mini-poster');
+var tossOutMini = document.querySelector('.div.mini-poster');
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -40,7 +37,6 @@ var images = [
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
 ];
-
 var titles = [
   "determination",
   "success",
@@ -78,7 +74,6 @@ var titles = [
   "understanding",
   "wisdom"
 ];
-
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
@@ -119,15 +114,13 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-
 var savedPosters = [
   makePoster(
-     "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
-     "Optimism",
-     "Keep a joyful heart!"
-   )
+    "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
+    "Optimism",
+    "Keep a joyful heart!"
+  )
 ];
-
 var onscreenPoster;
 var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
 
@@ -151,7 +144,7 @@ function goRandom() {
 }
 
 function makePoster(imageURL, title, quote) {
-    return new Poster(imageURL, title, quote);
+  return new Poster(imageURL, title, quote);
 }
 
 function saveInput(event) {
@@ -161,31 +154,25 @@ function saveInput(event) {
   var cusTitle = titleInput.value;
   var cusQuote = quoteInput.value;
 
-  // images.push(cusImage);
-  // titles.push(cusTitle);
-  // quotes.push(cusQuote);
-
   cusPoster = makePoster(cusImage, cusTitle, cusQuote);
 
   targetImage.src = cusPoster.imageURL;
   targetTitle.innerText = cusPoster.title;
   targetQuote.innerText = cusPoster.quote;
 
-  //added code below
-  onscreenPoster = new Poster (cusImage, cusTitle, cusQuote);
+  onscreenPoster = new Poster(cusImage, cusTitle, cusQuote);
 
   if (cusPoster.imageURL === "") {
     switchBackFromSaved();
     goRandom();
   }
-  // added code above
 
   makePosterSec.classList.add('hidden');
   mainPosterSec.classList.remove('hidden');
 }
 
 function onlyOnce() {
-  for (var i = 0; i < savedPosters.length; i ++) {
+  for (var i = 0; i < savedPosters.length; i++) {
     if (savedPosters[i].id === onscreenPoster.id) {
       return false;
     }
@@ -201,57 +188,31 @@ function goSavePoster() {
     quotes.push(onscreenPoster.quote);
   }
 }
-    // savedPosters.push(cusPoster) || savedPosters.push(goRandom.value);
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-// targetImage.src = images[getRandomIndex(images)];
-// targetTitle.innerText = titles[getRandomIndex(titles)];
-// targetQuote.innerText = quotes[getRandomIndex(quotes)];
 
 function switchToFormPage() {
-   mainPosterSec.classList.add('hidden');
-   makePosterSec.classList.remove('hidden');
-   savedPostersSec.classList.add('hidden');
+  mainPosterSec.classList.add('hidden');
+  makePosterSec.classList.remove('hidden');
+  savedPostersSec.classList.add('hidden');
 }
 
 function switchToSavedPosters() {
-    mainPosterSec.classList.add('hidden');
-    savedPostersSec.classList.remove('hidden');
-    savedPostersGrid.innerHTML = "";
-    for (var i = 0; i < savedPosters.length; i++) {
-        savedPostersGrid.insertAdjacentHTML("afterbegin", `
+  mainPosterSec.classList.add('hidden');
+  savedPostersSec.classList.remove('hidden');
+  savedPostersGrid.innerHTML = "";
+  for (var i = 0; i < savedPosters.length; i++) {
+    savedPostersGrid.insertAdjacentHTML("afterbegin", `
             <div class="mini-poster" data-id=${savedPosters[i].id}>
               <img src=${savedPosters[i].imageURL}>
               <h2>${savedPosters[i].title}</h2>
               <h4>${savedPosters[i].quote}</h4>
             </div>`)
-    }
-
+  }
 }
-        //   <article>
-        //     <img src=${savedPosters[i].imageURL}>
-        //     <h2>${savedPosters[i].title}</h2>
-        //     <h4>${savedPosters[i].quote}</h4>
-        //   </article>`;
 
-//makePoster(targetImage.src, targetTitle.innerText, targetQuote.innerText)
-
-function deletePoster() {
-  //
-  // for (var i = 0; i < savedPosters.length; i++) {
-  //     //savedPostersGrid.insertAdjacentHTML("afterbegin", `
-  //         <div class="mini-poster" data-id=${savedPosters[i].id}>
-  //           <img src=${savedPosters[i].imageURL}>
-  //           <h2>${savedPosters[i].title}</h2>
-  //           <h4>${savedPosters[i].quote}</h4>
-  //         </div>`)
-  //
-  // var tossOutDiv = document.querySelector('.mini-poster')
-  // var tossOutMini = document.querySelector('.div.mini-poster')
-  //
-} //var savedPostersGrid = document.querySelector('.saved-posters-grid')
 function switchBackFromForm() {
   makePosterSec.classList.add('hidden');
   mainPosterSec.classList.remove('hidden');
