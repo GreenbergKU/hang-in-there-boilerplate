@@ -116,10 +116,10 @@ var quotes = [
 ];
 var savedPosters = [
   makePoster(
-     "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
-     "Optimism",
-     "Keep a joyful heart!"
-   )
+    "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
+    "Optimism",
+    "Keep a joyful heart!"
+  )
 ];
 var onscreenPoster;
 var cusPoster = [(imageInput.value, titleInput.value, quoteInput.value)];
